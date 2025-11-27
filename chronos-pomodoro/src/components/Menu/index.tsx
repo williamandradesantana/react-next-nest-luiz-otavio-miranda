@@ -14,7 +14,7 @@ export function Menu() {
 
     setTheme((prevTheme) => {
       const nextTheme = prevTheme === "dark" ? "light" : "dark";
-      document.documentElement.setAttribute("data-theme", nextTheme);
+      document.documentElement.setAttribute("data-theme", nextTheme); // useEffect
       return nextTheme;
     });
   }
