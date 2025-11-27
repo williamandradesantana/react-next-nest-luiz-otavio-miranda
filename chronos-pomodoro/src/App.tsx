@@ -11,10 +11,36 @@ import { PlayCircleIcon } from "lucide-react";
 
 import "./styles/theme.css";
 import "./styles/global.css";
+import { Heading } from "./components/Heading";
+import { useState } from "react";
 
 export function App() {
+  const [count, setCount] = useState<number>(() => {
+    console.log("Lazy initilization");
+    return 0;
+  });
+
+  const handleClick = () => {
+    // Pula de três em três por armazenar o estado anterior internamente
+    /*
+      setCount((prev) => prev + 1);
+      setCount((prev) => prev + 1);
+      setCount((prev) => prev + 1);
+    */
+
+    /* Executa apenas uma vez
+      setCount(count + 1);
+      setCount(count + 1);
+      setCount(count + 1);
+    */
+
+    setCount((prev) => prev + 1);
+  };
   return (
     <>
+      <Heading> {count} </Heading>
+      <button onClick={handleClick}>Aumentar</button>
+
       <Container>
         <Logo />
       </Container>
