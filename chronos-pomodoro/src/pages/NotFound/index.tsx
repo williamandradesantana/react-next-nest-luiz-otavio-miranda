@@ -1,7 +1,7 @@
 import { MainTemplate } from "../../templates/MainTemplate";
 import { Container } from "../../components/Container";
 
-export function Home() {
+export function NotFound() {
   return (
     <MainTemplate>
       <Container>
