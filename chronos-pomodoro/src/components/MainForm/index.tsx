@@ -1,17 +1,18 @@
 import { PlayCircleIcon } from "lucide-react";
 
-import { useState } from "react";
+import { useRef } from "react";
 
 import { Cycles } from "../Cycles";
 import { DefaultButton } from "../DefaultButton";
 import { DefaultInput } from "../DefaultInput";
 
 export function MainForm() {
-  const [taskName, setTaskName] = useState<string>("");
+  // const [taskName, setTaskName] = useState<string>(""); utilizar quando precisar saber os valor em tempo real (cpf)
+  const taskNameInput = useRef<HTMLInputElement>(null); // não causa várias renderizações no componente
 
   function handleCreateNewTask(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    console.log(taskName);
+    console.log("Deu certo");
   }
 
   return (
@@ -22,8 +23,9 @@ export function MainForm() {
           type="text"
           labelText="Task"
           placeholder="Enter something"
-          value={taskName}
-          onChange={(e) => setTaskName(e.target.value)}
+          ref={taskNameInput}
+          // value={taskName}
+          // onChange={(e) => setTaskName(e.target.value)}
         />
       </div>
 
