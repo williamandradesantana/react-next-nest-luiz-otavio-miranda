@@ -10,6 +10,7 @@ import type { TaskModel } from "../../models/TaskModel";
 import { useTaskContext } from "../../contexts/TaskContext/useTaskContext";
 import { getNextCycle } from "../../utils/getNextCycle";
 import { getNextCycleType } from "../../utils/getNextCycleType";
+import { formatSecondsToMinutes } from "../../utils/formatSecondsToMinutes";
 
 export function MainForm() {
   // const [taskName, setTaskName] = useState<string>(""); utilizar quando precisar saber os valor em tempo real (cpf)
@@ -51,7 +52,7 @@ export function MainForm() {
         activeTask: newTask,
         currentCycle: nextCycle,
         secondsRemaining: secondsRemaining, // conferir
-        formattedSecondsReaminig: "00:00", // conferir
+        formattedSecondsReaminig: formatSecondsToMinutes(secondsRemaining), // conferir
         tasks: [...prevState.tasks, newTask],
         config: {
           ...prevState.config,
