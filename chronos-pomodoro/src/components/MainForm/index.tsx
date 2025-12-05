@@ -8,12 +8,16 @@ import { DefaultInput } from "../DefaultInput";
 
 import type { TaskModel } from "../../models/TaskModel";
 import { useTaskContext } from "../../contexts/TaskContext/useTaskContext";
+import { getNextCycle } from "../../utils/getNextCycle";
 
 export function MainForm() {
   // const [taskName, setTaskName] = useState<string>(""); utilizar quando precisar saber os valor em tempo real (cpf)
   const taskNameInput = useRef<HTMLInputElement>(null); // não causa várias renderizações no componente
 
-  const { setState } = useTaskContext();
+  const { state, setState } = useTaskContext();
+
+  // ciclos
+  const nextCycle = getNextCycle(state.currentCycle);
 
   function handleCreateNewTask(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -43,7 +47,7 @@ export function MainForm() {
       return {
         ...prevState,
         activeTask: newTask,
-        currentCycle: 1, // conferir
+        currentCycle: nextCycle,
         secondsRemaining: secondsRemaining, // conferir
         formattedSecondsReaminig: "00:00", // conferir
         tasks: [...prevState.tasks, newTask],
