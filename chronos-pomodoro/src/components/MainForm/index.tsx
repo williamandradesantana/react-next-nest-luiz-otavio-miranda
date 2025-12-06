@@ -72,6 +72,7 @@ export function MainForm() {
           labelText="Task"
           placeholder="Enter something"
           ref={taskNameInput}
+          disabled={!!state.activeTask}
           // value={taskName}
           // onChange={(e) => setTaskName(e.target.value)}
         />
