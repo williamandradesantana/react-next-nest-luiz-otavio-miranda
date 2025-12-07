@@ -1,4 +1,4 @@
-import { PlayCircleIcon } from "lucide-react";
+import { PlayCircleIcon, StopCircleIcon } from "lucide-react";
 
 import { useRef } from "react";
 
@@ -89,7 +89,23 @@ export function MainForm() {
       )}
 
       <div className="formRow">
-        <DefaultButton color="green" icon={<PlayCircleIcon />} />
+        {!state.activeTask ? (
+          <DefaultButton
+            aria-label="Iniciar nova tarefa"
+            title="Iniciar nova tarefa"
+            type="submit"
+            color="green"
+            icon={<PlayCircleIcon />}
+          />
+        ) : (
+          <DefaultButton
+            color="red"
+            aria-label="Parar tarefa"
+            title="Parar tarefa"
+            type="button"
+            icon={<StopCircleIcon />}
+          />
+        )}
       </div>
     </form>
   );
