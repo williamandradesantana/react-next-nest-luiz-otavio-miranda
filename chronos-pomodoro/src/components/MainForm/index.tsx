@@ -16,9 +16,9 @@ import { showMessage } from "../../adapters/showMessage";
 
 export function MainForm() {
   // const [taskName, setTaskName] = useState<string>(""); utilizar quando precisar saber os valor em tempo real (cpf)
-  const taskNameInput = useRef<HTMLInputElement>(null); // não causa várias renderizações no componente
-
   const { state, dispatch } = useTaskContext();
+  const taskNameInput = useRef<HTMLInputElement>(null); // não causa várias renderizações no componente
+  const lastTaskName = state.tasks[state.tasks.length - 1]?.name || "";
 
   // ciclos
   const nextCycle = getNextCycle(state.currentCycle);
@@ -70,6 +70,7 @@ export function MainForm() {
           placeholder="Enter something"
           ref={taskNameInput}
           disabled={!!state.activeTask}
+          defaultValue={lastTaskName}
           // value={taskName}
           // onChange={(e) => setTaskName(e.target.value)}
         />
