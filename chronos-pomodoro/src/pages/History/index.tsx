@@ -61,6 +61,12 @@ export function History() {
     dispatch({ type: TaskActionsTypes.RESET_STATE });
   }, [confirmClearHistory, dispatch]);
 
+  useEffect(() => {
+    return () => {
+      showMessage.dismiss();
+    };
+  }, []);
+
   function handleResetHistory() {
     showMessage.dismiss();
     showMessage.confirm("Tem certeza?", (confirmation) => {
