@@ -67,6 +67,10 @@ export function History() {
     };
   }, []);
 
+  useEffect(() => {
+    document.title = "Histórico - Chronos Pomodoro";
+  }, []);
+
   function handleResetHistory() {
     showMessage.dismiss();
     showMessage.confirm("Tem certeza?", (confirmation) => {
