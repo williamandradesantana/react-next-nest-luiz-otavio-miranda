@@ -1,19 +1,23 @@
 import { PostCoverImage } from "../PostCoverImage";
 import { PostSummary } from "../PostSummary";
+import { PostModel } from "@/models/post/post-model";
+import { findAllPublicPosts } from "@/lib/post/queries";
 
-export function PostFeatured() {
-  const slug = "qualquer-coisa";
-  const postLink = `/post/${slug}`;
+export async function PostFeatured() {
+  const posts: PostModel[] = await findAllPublicPosts();
+  const post = posts[0];
+
+  const postLink = `/post/${post.slug}`;
 
   return (
     <section className="grid grid-cols-1 gap-8 mb-16 sm:grid-cols-2 group">
       <PostCoverImage
         linkProps={{ href: postLink }}
         imageProps={{
-          src: "/images/bryen_9.png",
+          src: post.coverImageUrl,
           width: 1200,
           height: 720,
-          alt: "Alt da imagem",
+          alt: post.title,
           priority: true,
         }}
       ></PostCoverImage>
@@ -21,9 +25,9 @@ export function PostFeatured() {
       <PostSummary
         postHeading="h1"
         postLink={postLink}
-        createdAt="2025-04-08T00:24:38.616Z"
-        title="Olha a rotina matinal de pessoas altamente eficazes"
-        excerpt="O Next.js também é uma boa escolha para quem quer se preocupar com performance e SEO."
+        createdAt={post.createdAt}
+        title={post.title}
+        excerpt={post.excerpt}
       />
     </section>
   );
