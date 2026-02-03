@@ -6,7 +6,7 @@ import { Footer } from "@/components/Footer";
 
 export const metadata: Metadata = {
   title: {
-    default: " The blog - Este é um blog com Next.js",
+    default: "The blog - Este é um blog com Next.js",
     template: "%s | The blog",
   },
   description: "Essa seria a descrição da página",
