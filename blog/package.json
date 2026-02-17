@@ -2,6 +2,11 @@
   "name": "blog",
   "version": "0.1.0",
   "private": true,
+  "author": {
+    "name": "William Santana",
+    "email": "williamandrade1058@gmail.com",
+    "url": "https://williamsantana-portfolio.vercel.app/"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
