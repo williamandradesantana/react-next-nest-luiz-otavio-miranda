@@ -12,25 +12,32 @@ export class DrizzlePostRepository implements PostRepository {
     return posts;
   }
 
-  async findBySlugPublic(slug: string): Promise<PostModel | undefined> {
+  async findBySlugPublic(slug: string): Promise<PostModel> {
     const post = await drizzleDb.query.posts.findFirst({
       where: (posts, { eq, and }) =>
         and(eq(posts.published, true), eq(posts.slug, slug)),
     });
 
+    if (!post) throw new Error("Post not found for the slug!");
+
     return post;
   }
 
   async findAll(): Promise<PostModel[]> {
-    throw new Error("Method not implemented.");
+    const posts = await drizzleDb.query.posts.findMany({
+      orderBy: (posts, { desc }) => desc(posts.createdAt),
+    });
+
+    return posts;
   }
 
   async findById(id: string): Promise<PostModel> {
-    throw new Error("Method not implemented.");
+    const post = await drizzleDb.query.posts.findFirst({
+      where: (posts, { eq }) => eq(posts.id, id),
+    });
+
+    if (!post) throw new Error("Post not found for the id!");
+
+    return post;
   }
 }
-
-(async () => {
-  const repo = new DrizzlePostRepository();
-  await repo.findBySlugPublic("rotina-matinal-de-pessoas-altamente-eficazes");
-})();
