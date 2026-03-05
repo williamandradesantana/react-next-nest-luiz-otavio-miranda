@@ -2,7 +2,7 @@ import { revalidateExampleAction } from "@/app/actions/revalidate-example";
 import { formatHour } from "@/utils/format-datetime";
 
 export const dynamic = "force-static";
-// export const revalidate = 10;
+export const revalidate = 30;
 
 export default async function ExemploIdPage({
   params,
