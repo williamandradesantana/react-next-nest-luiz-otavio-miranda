@@ -9,5 +9,5 @@ export async function revalidateExampleAction(formData: FormData) {
   console.log(`Estou em uma server action - ${path}`);
 
   // revalidatePath(`${path}`);
-  revalidateTag("randomuser", "max");
+  revalidateTag("formatHourCached", "");
 }
