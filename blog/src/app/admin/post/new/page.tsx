@@ -1,3 +1,4 @@
+import { Button } from "@/components/Button";
 import { Metadata } from "next";
 
 export const dynamic = "force-dynamic";
@@ -7,5 +8,9 @@ export const metadata: Metadata = {
 };
 
 export default async function AdminPostNewPage() {
-  return <div className="py-16 text-6xl">AdminPostNewPage </div>;
+  return (
+    <div className="py-16">
+      <Button type="submit">Funciona como o JSX</Button>
+    </div>
+  );
 }
