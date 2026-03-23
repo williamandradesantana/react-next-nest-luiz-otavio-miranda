@@ -9,8 +9,16 @@ export const metadata: Metadata = {
 
 export default async function AdminPostNewPage() {
   return (
-    <div className="py-16">
-      <Button type="submit">Funciona como o JSX</Button>
+    <div className="py-16 flex gap-4 flex-wrap">
+      <Button variant="default" size="lg">
+        Confirma
+      </Button>
+      <Button variant="ghost" size="sm">
+        Funciona como o JSX
+      </Button>
+      <Button variant="danger" size="md">
+        Funciona como o JSX
+      </Button>
     </div>
   );
 }
