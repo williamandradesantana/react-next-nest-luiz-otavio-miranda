@@ -1,13 +1,15 @@
 "use client";
 
+import { uploadImageAction } from "@/app/actions/upload/upload-image-action";
 import { Button } from "@/components/Button";
 import { IMAGE_UPLOADER_MAX_SIZE } from "@/lib/constants";
 import { ImageUpIcon } from "lucide-react";
-import { useRef } from "react";
+import { useRef, useTransition } from "react";
 import { toast } from "react-toastify";
 
 export function ImageUploader() {
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const [isUploading, startTransition] = useTransition();
 
   function handleChooseFile() {
     if (!fileInputRef.current) return;
@@ -33,8 +35,10 @@ export function ImageUploader() {
 
     const formData = new FormData();
     formData.append("file", file);
-    // TODO: Criar a action para upload de arquivo.
-    console.log(formData.get("file"));
+
+    startTransition(async () => {
+      const result = await uploadImageAction();
+    });
 
     fileInput.value = "";
   }
