@@ -13,19 +13,60 @@ export function ManagePostForm() {
   return (
     <form action="" className="mb-16">
       <div className="flex flex-col gap-6">
-        <InputText labelText="Nome" placeholder="Digite seu nome" />
-        <InputText labelText="Email" placeholder="Digite seu email" />
-        <InputCheckbox labelText="Sobrenome" type="checkbox" />
-        <ImageUploader />
+        <InputText
+          labelText="ID"
+          name="id"
+          placeholder="ID gerado automaticamente"
+          type="text"
+          defaultValue={""}
+          readOnly
+        />
+        <InputText
+          labelText="Slug"
+          name="slug"
+          placeholder="Slug gerada automaticamente"
+          type="text"
+          defaultValue={""}
+          readOnly
+        />
+        <InputText
+          labelText="Autor"
+          name="author"
+          placeholder="Digite o nome do autor"
+          type="text"
+          defaultValue={""}
+        />
+        <InputText
+          labelText="Título"
+          name="title"
+          placeholder="Digite o título do post"
+          type="text"
+          defaultValue={""}
+        />
+        <InputText
+          labelText="Excerto"
+          name="excerpt"
+          placeholder="Digite o excerto do post"
+          type="text"
+          defaultValue={""}
+        />
         <MarkdownEditor
-          labelText="Conteúdo do post"
-          disabled={false}
-          textAreaName="content"
+          labelText="Conteúdo"
           value={contentValue}
           setValue={setContentValue}
+          textAreaName="content"
+          disabled={false}
         />
-        <InputText labelText="Sobrenome" defaultValue="Olá mundo" disabled />
-        <InputText labelText="Sobrenome" defaultValue="Olá mundo" readOnly />
+        <ImageUploader />
+
+        <InputText
+          labelText="URL da imagem de capa"
+          name="coverImageUrl"
+          placeholder="Digite a url da imagem"
+          type="text"
+          defaultValue={""}
+        />
+        <InputCheckbox labelText="Publicar?" name="published" type="checkbox" />
       </div>
 
       <div className="mt-4">
