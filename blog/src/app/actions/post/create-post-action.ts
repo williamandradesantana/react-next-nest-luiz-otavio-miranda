@@ -11,10 +11,19 @@ export async function createPostAction(
   prevState: CreatePostActionState,
   formData: FormData,
 ): Promise<CreatePostActionState> {
-  const title = formData.get("title")?.toString() || "";
+  // Verificar se o usuário está logado
 
+  if (!(formData instanceof FormData)) {
+    return {
+      formState: { ...prevState.formState },
+      errors: ["Dados inválidos"],
+    };
+  }
+
+  const formDataToObject = Object.fromEntries(formData.entries()); // ["title", "Aqui vem o título"]
+  console.log(formDataToObject);
   return {
-    formState: { ...prevState.formState, title },
+    formState: { ...prevState.formState },
     errors: [],
   };
 }
