@@ -1,6 +1,9 @@
 "use server";
 
-import { PublicPost } from "@/dto/post/dto";
+import { makePartialPost, PublicPost } from "@/dto/post/dto";
+import { PostCreateSchema } from "@/lib/post/validation";
+import { PostModel } from "@/models/post/post-model";
+import { getZodErrorMessages } from "@/utils/get-zod-errors-messages";
 
 type CreatePostActionState = {
   formState: PublicPost;
@@ -21,9 +24,27 @@ export async function createPostAction(
   }
 
   const formDataToObject = Object.fromEntries(formData.entries()); // ["title", "Aqui vem o título"]
-  console.log(formDataToObject);
+  const zodParsedObj = PostCreateSchema.safeParse(formDataToObject);
+
+  if (!zodParsedObj.success) {
+    const errors = getZodErrorMessages(zodParsedObj.error);
+    return {
+      errors,
+      formState: makePartialPost(formDataToObject),
+    };
+  }
+
+  const validPostData = zodParsedObj.data;
+  const newPost: PostModel = {
+    ...validPostData,
+    createdAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString(),
+    id: Date.now().toString(),
+    slug: Math.random().toString(36),
+  };
+
   return {
-    formState: { ...prevState.formState },
+    formState: newPost,
     errors: [],
   };
 }
