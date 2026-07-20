@@ -1,5 +1,6 @@
 "use server";
 
+import { verifyPassword } from "@/lib/login/manage-login";
 import { asyncDelay } from "@/utils/async-delay";
 
 type LoginActionState = {
@@ -10,8 +11,40 @@ type LoginActionState = {
 export async function loginAction(state: LoginActionState, formData: FormData) {
   await asyncDelay(5000);
 
+  if (!(formData instanceof FormData)) {
+    return {
+      username: "",
+      error: "Dados inválidos",
+    };
+  }
+
+  const username = formData.get("username")?.toString().trim() || "";
+  const password = formData.get("password")?.toString().trim() || "";
+
+  if (!username || !password) {
+    return {
+      username: username,
+      error: "Digite o usuário e a senha",
+    };
+  }
+
+  const isUsernameValid = username === process.env.LOGIN_USER;
+  const isPasswordValid = await verifyPassword(
+    password,
+    process.env.LOGIN_PASS || "",
+  );
+
+  if (!isUsernameValid || !isPasswordValid) {
+    return {
+      username: username,
+      error: "Usuário ou senha inválidos",
+    };
+  }
+
+  // cria o cookie e redirencionar a página
+
   return {
-    username: "",
-    error: "Teste de erro",
+    username: username,
+    error: "Usuário válido com sucesso",
   };
 }
